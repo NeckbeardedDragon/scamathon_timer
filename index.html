@@ -1,6 +1,6 @@
 <!-- 
 
-    I made this in like 10 minutes for Bounceyboy's scamathon, a marathon stream starting at 8 hours and increasing for each Twitch subscription recieved during the marathon.
+    I made this in like 10 minutes for Bounceyboy's scamathon, a marathon stream starting at 12 hours and increasing for each Twitch subscription recieved during the marathon.
 
     The request was for a web-based timer with buttons to add time without stopping the timer, as described here: https://pastebin.com/Gmk4t6k0
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <script>
-            resetTime = 8*3600;
+            resetTime = 12*3600;
             time = resetTime;
             timer = null;
             function s2Time(sec_num){ // Brazenly copied, pasted, and edited from powtac's answer at https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss
@@ -79,7 +79,7 @@
         <table>
             <tr>
                 <td colspan="3">
-                    <div id="timerDiv">08:00:00</div>
+                    <div id="timerDiv">12:00:00</div>
                 </td>
             </tr>
             <tr>
