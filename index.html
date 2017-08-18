@@ -48,9 +48,9 @@
             }
 
             function reset(){
+                time = resetTime;
+                updateTime();
                 if(timer != null){
-                    time = resetTime;
-                    updateTime();
                     clearInterval(timer);
                     timer = null;
                 }
