@@ -1,0 +1,116 @@
+<!-- 
+
+    I made this in like 10 minutes for Bounceyboy's scamathon, a marathon stream starting at 8 hours and increasing for each Twitch subscription recieved during the marathon.
+
+    The request was for a web-based timer with buttons to add time without stopping the timer, as described here: https://pastebin.com/Gmk4t6k0
+
+-->
+
+<html>
+    <head>
+        <script>
+            resetTime = 8*3600;
+            time = 0;
+            timer = null;
+            paused = false;
+            function s2Time(sec_num){ // Brazenly copied, pasted, and edited from powtac's answer at https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss
+                var hours   = Math.floor(sec_num / 3600);
+                var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+                var seconds = sec_num - (hours * 3600) - (minutes * 60);
+                if (hours   < 10) {hours   = "0"+hours;}
+                if (minutes < 10) {minutes = "0"+minutes;}
+                if (seconds < 10) {seconds = "0"+seconds;}
+                return hours+':'+minutes+':'+seconds;
+            }
+
+            function updateTime(){
+                timerDiv.innerHTML = s2Time(time);
+            }
+
+            function countdown(){
+                if(time > 0){
+                    time -= 1;
+                }
+                updateTime();
+            }
+
+            function start(){
+                if(timer == null){
+                    if(!paused){
+                        time = resetTime;
+                    }else{
+                        paused = false;
+                    }
+                    updateTime();
+                    timer = setInterval(countdown,1000);
+                }
+            }
+
+            function pause(){
+                if(timer != null){
+                    paused = true;
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }
+
+            function reset(){
+                if(timer != null){
+                    time = resetTime;
+                    updateTime();
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }
+            function addTime(amt){
+                time += amt;
+                updateTime();
+            }
+        </script>
+        <style>
+            #timerDiv {
+                font-size: 72;
+                font-weight: bold;
+            }
+            * {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            td {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td colspan="3">
+                    <div id="timerDiv">08:00:00</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="start();">Start</button>
+                </td>
+                <td>
+                    <button onclick="pause();">Pause</button>
+                </td>
+                <td>
+                    <button onclick="reset();">Reset</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="addTime(3*60);">$4.99 Sub</button>
+                </td>
+                <td>
+                    <button onclick="addTime(6*60);">$9.99 sub</button>
+                </td>
+                <td>
+                    <button onclick="addTime(18*60);">$24.99 sub</button>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
