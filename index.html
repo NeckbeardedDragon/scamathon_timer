@@ -10,9 +10,8 @@
     <head>
         <script>
             resetTime = 8*3600;
-            time = 0;
+            time = resetTime;
             timer = null;
-            paused = false;
             function s2Time(sec_num){ // Brazenly copied, pasted, and edited from powtac's answer at https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss
                 var hours   = Math.floor(sec_num / 3600);
                 var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -36,11 +35,6 @@
 
             function start(){
                 if(timer == null){
-                    if(!paused){
-                        time = resetTime;
-                    }else{
-                        paused = false;
-                    }
                     updateTime();
                     timer = setInterval(countdown,1000);
                 }
@@ -48,7 +42,6 @@
 
             function pause(){
                 if(timer != null){
-                    paused = true;
                     clearInterval(timer);
                     timer = null;
                 }
