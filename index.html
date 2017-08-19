@@ -59,6 +59,11 @@
                 time += amt;
                 updateTime();
             }
+            function setTime(){
+                time = 3600*parseInt(hrInp.value)+60*parseInt(minInp.value)+parseInt(secInp.value);
+                resetTime = time;
+                updateTime();
+            }
         </script>
         <style>
             #timerDiv {
@@ -103,6 +108,22 @@
                 </td>
                 <td>
                     <button onclick="addTime(18*60);">$24.99 sub</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="hrInp" type="number" min="0" max="72" step="1" value="12">
+                </td>
+                <td>
+                    <input id="minInp" type="number" min="0" max="60" step="1" value="0">
+                </td>
+                <td>
+                    <input id="secInp" type="number" min="0" max="60" step="1" value="0">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="setTime();">Set Time</button>
                 </td>
             </tr>
         </table>
